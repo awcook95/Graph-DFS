@@ -17,7 +17,7 @@ def dfs(G, I, F):
 
         for neighbor in G[current]: #for all vertices adjacent to current vertex
             stack.append(neighbor)
-            pathMap[neighbor] = current #update the current path from the starting point
+            if neighbor not in pathMap : pathMap[neighbor] = current #update the current path from the starting point
 
     return False #final vertex was not found
 
@@ -53,11 +53,21 @@ print("The path map: ")
 for vertex in pathMap:
     print(vertex, ':', pathMap[vertex])
 
-"""
+
 if pathMap != False: #if dfs succeeded
     curr = F #start at the target node
-    while (curr != None):
-        print(curr)
+    output = [] #the path will be backwards so store in a list first
+    while (curr != I):
+        output.append(curr)
         curr = pathMap[curr] #and use the path map to trace back the steps taken
-else: print("A path to the final vertex was not found")
-"""
+    output.append(I) #add the starting point separately
+else: exit("A path to the final vertex was not found")
+
+print("The path from", I, "to", F, "is:")
+for vertex in output[::-1]: #print list in reverse
+    print(vertex)
+
+
+
+
+
