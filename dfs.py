@@ -8,6 +8,8 @@ def dfs(G, I, F):
     stack = [] #stack tracks traversal order of vertices for the dfs
     stack.append(I) #push initial vertex
 
+    print("vertices are being visited in this order")
+
     while stack:
         current = stack.pop()
         print(current)
@@ -17,8 +19,9 @@ def dfs(G, I, F):
         visited[current] = True #set current node to visited
 
         for neighbor in G[current]: #for all vertices adjacent to current vertex
-            if not visited[neighbor] : stack.append(neighbor)
-            if neighbor not in pathMap : pathMap[neighbor] = current #update the current path from the starting point
+            if not visited[neighbor] : 
+                stack.append(neighbor)
+                pathMap[neighbor] = current #update the current path from the starting point
 
     return False #final vertex was not found
 
