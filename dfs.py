@@ -10,13 +10,14 @@ def dfs(G, I, F):
 
     while stack:
         current = stack.pop()
+        print(current)
         if current == F: return pathMap #once final vertex  is found return the path
 
         if(visited[current]): continue #if node is already visited skip rest of loop
         visited[current] = True #set current node to visited
 
         for neighbor in G[current]: #for all vertices adjacent to current vertex
-            stack.append(neighbor)
+            if not visited[neighbor] : stack.append(neighbor)
             if neighbor not in pathMap : pathMap[neighbor] = current #update the current path from the starting point
 
     return False #final vertex was not found
@@ -32,7 +33,7 @@ with open("connections.txt", 'r') as f:
 
         line = line.strip('\n') #remove newline
         li = list(line.split(" ")) #convert each line of the file to a list
-        adjList[li[0]] = sorted(li[2:]) #map the vertex to its adjacent vertices
+        adjList[li[0]] = sorted(li[2:], reverse = True) #map the vertex to its adjacent vertices
 
        
 #print dictionary for testing
@@ -64,7 +65,7 @@ if pathMap != False: #if dfs succeeded
 else: exit("A path to the final vertex was not found")
 
 print("The path from", I, "to", F, "is:")
-for vertex in output[::-1]: #print list in reverse
+for vertex in reversed(output):
     print(vertex)
 
 
