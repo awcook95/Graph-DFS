@@ -68,10 +68,9 @@ if pathMap != False: #if dfs succeeded
 else: exit("A path to the final vertex was not found")
 
 print("The path from", I, "to", F, "is:")
-for vertex in reversed(output):
-    print(vertex)
-
-
+output = output[::-1]
+for i in range(0, len(output)-1):
+    print(output[i], "to", output[i+1])
 
 
 
