@@ -10,11 +10,8 @@ def dfs(G, I, F):
     stack = [] #stack tracks traversal order of vertices for the dfs
     stack.append(I) #push initial vertex
 
-    print("vertices are being visited in this order")
-
     while stack:
         current = stack.pop()
-        print(current)
         if current == F: return pathMap #once final vertex  is found return the path
 
         if(visited[current]): continue #if node is already visited skip rest of loop
@@ -58,19 +55,15 @@ with open("locations.txt", 'r') as f:
         location[li[0]] = li[1:] #map the vertex to its x and y coordinate
 
 
-#I = input("Enter the initial vertex\n")
-#F = input("Enter the final vertex\n")
-I = "A1"
-F = "G1"
+I = input("Enter the initial vertex\n")
+F = input("Enter the final vertex\n")
+
+if I not in adjList or F not in adjList:
+    exit("One of the vertices you entered is not in the graph")
 
 print("The initial vertex is: " + I + " and the final vertex is: " + F)
 
 pathMap = dfs(adjList, I, F)
-
-print("The path map: ")
-for vertex in pathMap:
-    print(vertex, ':', pathMap[vertex])
-
 
 if pathMap != False: #if dfs succeeded
     curr = F #start at the target node
